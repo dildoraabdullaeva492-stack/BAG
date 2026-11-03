@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Log In &amp; Sign Up — AX BAGS Member Portal</title>
+    <meta
+      name="description"
+      content="Log in or sign up for an AX BAGS member account to manage orders, VIP drops, and lifetime warranty registration."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media = 'all'"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="site-navbar">
+      <div class="container nav-inner">
+        <a href="index.html#page-home" class="brand-logo">
+          <span class="logo-box">AX</span>
+          <span>AX BAGS</span>
+        </a>
+        <nav class="nav-links">
+          <a href="index.html#page-home">HOME</a>
+          <a href="index.html#page-arrivals">NEW</a>
+          <a href="index.html#page-catalog">SHOP</a>
+          <a href="index.html#page-lookbook">LOOKS</a>
+          <a href="index.html#page-anatomy">TECH</a>
+          <a href="index.html#page-compare">COMPARE</a>
+          <a href="index.html#page-size">SIZE</a>
+          <a href="index.html#page-vip">VIP</a>
+          <a href="index.html#page-reviews">FAQ</a>
+          <a href="contact.html" class="active">CONTACT</a>
+        </nav>
+        <div class="nav-actions">
+          <button class="cart-trigger" onclick="toggleCart(true)">
+            <span>LOCKER</span>
+            <span class="cart-count">0</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="contact-page-wrap">
+      <div class="container">
+        <div class="auth-header scroll-reveal visible">
+          <span class="section-kicker">AX BAGS • MEMBER ACCESS PORTAL</span>
+          <h1>LOG IN OR CREATE YOUR AX ACCOUNT</h1>
+          <p>
+            Access your AX Gear Locker, track express shipments, or register a
+            new men's &amp; boys' carry system.
+          </p>
+        </div>
+        <div class="auth-grid">
+          <article class="auth-card ax-card scroll-reveal visible">
+            <div class="auth-card-head">
+              <span class="auth-badge">EXISTING MEMBER • LEFT PORTAL</span>
+              <h2>LOG IN</h2>
+              <p class="sub">
+                Sign in with your AX account credentials to view orders and
+                warranty status.
+              </p>
+            </div>
+            <form class="auth-form" onsubmit="handleLogin(event)">
+              <div class="auth-fields">
+                <div class="form-group">
+                  <label>EMAIL ADDRESS</label>
+                  <input
+                    type="email"
+                    name="email"
+                    required
+                    placeholder="rider@axbags.com"
+                  />
+                </div>
+                <div class="form-group">
+                  <label>PASSWORD</label>
+                  <input
+                    type="password"
+                    name="password"
+                    required
+                    placeholder="••••••••••••"
+                  />
+                </div>
+              </div>
+              <div>
+                <button type="submit" class="btn-primary full-w">
+                  LOG IN →
+                </button>
+                <div class="toast-msg"></div>
+              </div>
+            </form>
+          </article>
+
+          <article class="auth-card ax-card scroll-reveal visible">
+            <div class="auth-card-head">
+              <span class="auth-badge signup">NEW RECRUIT • RIGHT PORTAL</span>
+              <h2>SIGN UP</h2>
+              <p class="sub">
+                Create a new AX BAGS profile for VIP drops, express checkout,
+                and lifetime warranty activation.
+              </p>
+            </div>
+            <form class="auth-form" onsubmit="handleSignup(event)">
+              <div class="auth-fields">
+                <div class="form-group">
+                  <label>FULL NAME</label>
+                  <input
+                    type="text"
+                    name="fullName"
+                    required
+                    placeholder="Abdulaziz Aliyev"
+                  />
+                </div>
+                <div class="form-group">
+                  <label>EMAIL ADDRESS</label>
+                  <input
+                    type="email"
+                    name="email"
+                    required
+                    placeholder="abdulaziz@axbags.com"
+                  />
+                </div>
+                <div class="form-group">
+                  <label>PHONE NUMBER</label>
+                  <input
+                    type="tel"
+                    name="phone"
+                    required
+                    placeholder="+998 95 481 57 74"
+                  />
+                </div>
+                <div class="form-group">
+                  <label>PASSWORD</label>
+                  <input
+                    type="password"
+                    name="password"
+                    required
+                    placeholder="Create a strong password"
+                  />
+                </div>
+              </div>
+              <div>
+                <button type="submit" class="btn-primary btn-flame full-w">
+                  SIGN UP →
+                </button>
+                <div class="toast-msg"></div>
+              </div>
+            </form>
+          </article>
+        </div>
+      </div>
+    </main>
+
+    <div
+      id="cart-drawer"
+      class="drawer-backdrop"
+      onclick="if (event.target === this) toggleCart(false);"
+    >
+      <aside class="cart-drawer">
+        <div class="drawer-head">
+          <h3>AX GEAR LOCKER (<span class="cart-count">0</span>)</h3>
+          <button class="close-btn" onclick="toggleCart(false)">✕</button>
+        </div>
+        <div class="ship-bar-wrap">
+          <p id="ship-msg">Add $150.00 more for Free Express Shipping</p>
+          <div class="ship-track">
+            <div id="ship-fill" class="ship-fill"></div>
+          </div>
+        </div>
+        <div id="cart-items" class="cart-items"></div>
+        <div class="drawer-foot">
+          <div class="subtotal-row">
+            <span>ESTIMATED TOTAL</span>
+            <strong id="cart-subtotal">$0.00</strong>
+          </div>
+          <button
+            class="btn-primary full-w"
+            onclick="
+              this.textContent = 'LOCKER ORDER DISPATCHED ✓';
+              setTimeout(
+                () => (this.textContent = 'INSTANT EXPRESS CHECKOUT →'),
+                2200,
+              );
+            "
+          >
+            INSTANT EXPRESS CHECKOUT →
+          </button>
+        </div>
+      </aside>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
